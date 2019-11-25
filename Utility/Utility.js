@@ -102,32 +102,6 @@ module.exports=
         }
     },
 
-    checkPrime(number)
-    {
-        var i, temp=0, flag=0;      
-        temp = ( number / 2 | 0);      
-        if( number==0 || number==1 )
-        {  
-            return false    
-        }
-        else
-        {  
-            for(i=2;i<=temp;i++)
-            {      
-                if(number%i==0)
-                {      
-                    return false;     
-                    flag=1;      
-                    break;      
-                }      
-            }      
-            if(flag==0)  
-            { 
-                return true;
-            }  
-        }  
-    },
-
     readFromFile(fileName){
 
         var fs = require("fs");
@@ -180,7 +154,11 @@ module.exports=
     
     },
 
-
+    /**
+     * @description : buuble sort
+     * @param {array need to sort} elementArray
+     * @returns : sorted array 
+     */
     bubbleSort( elementArray )
     {
         let temp;
@@ -197,6 +175,13 @@ module.exports=
         
     },
 
+    /**
+     * 
+     * @param {array in which search to be done} elementArray 
+     * @param {low position of array} l 
+     * @param {high position of array} h 
+     * @param {word to be need to search} word 
+     */
     binarySearch(elementArray, l ,h, word)
     {
     
@@ -222,6 +207,11 @@ module.exports=
         return -1;
     },
 
+    /**
+     * @description : insertion sort
+     * @param {array need to sort} elementArray
+     * @returns : sorted array 
+     */
     insertionSort(elementArray)
     {     
         let j;
@@ -242,6 +232,11 @@ module.exports=
         
     },
 
+    /**
+     * @description : compare two arrays
+     * @param {array 1 to be compare} array1 
+     * @param {array 2 to be compare} array2 
+     */
     arrayCompare( array1 , array2 )
     {
         for (let i = 0; i < array1.length; i++) 
@@ -251,6 +246,11 @@ module.exports=
         return true; 
     },
 
+    /**
+     * @description : checks strings are angram or not
+     * @param {string to be check anagram or not} string1 
+     * @param {string to be check anagram or not} string2 
+     */
     checkAnagram(string1, string2)
     {
         var stringArray1 = string1.split('');
@@ -270,6 +270,11 @@ module.exports=
         
     },
 
+    /**
+     * @description : checks number are anagrams are or not
+     * @param {number to be checked for anagram} number1 
+     * @param {number to be checked for anagram} number2 
+     */
     checkAnagramForInteger(number1, number2)
     {
         var numberArray1 = this.separateNumber(number1);
@@ -289,6 +294,11 @@ module.exports=
         
     },
 
+    /**
+     * @description : for separating digit of number
+     * @param {number need to separeate} number 
+     * @returns : array of digits
+     */
     separateNumber(number)
     {
         var i=0;
@@ -303,9 +313,43 @@ module.exports=
         return tempArray;
     },
 
+    /**
+     * @description : check the number is prime or not
+     * @param {number to be check } number 
+     */
+    checkPrime(number)
+    {
+        var i, temp=0, flag=0;      
+        temp = ( number / 2 | 0);      
+        if( number==0 || number==1 )
+        {  
+            return false    
+        }
+        else
+        {  
+            for(i=2;i<=temp;i++)
+            {      
+                if(number%i==0)
+                {      
+                    return false;     
+                    flag=1;      
+                    break;      
+                }      
+            }      
+            if(flag==0)  
+            { 
+                return true;
+            }  
+        }  
+    },
+
+    /**
+     * @description : function to return reverse of a number
+     * @param {passing number} number 
+     * @returns : reverse of a number
+     */
     reverseInteger( number )
     {
-
         var reverse = 0;
         while(number != 0) {
             var digit = number % 10;
@@ -316,6 +360,12 @@ module.exports=
 
     },
 
+    /**
+     * @description : compare to string and its reverse and check it is palindrome or not
+     * @param {string} value 
+     * @param {reverse of string} reverseValue 
+     * @returns : strings are palindrome or not
+     */
     checkPalindrom( value, reverseValue )
     {
         if( value === reverseValue )
@@ -323,29 +373,33 @@ module.exports=
         return false;
     },
 
+    /**
+     * @description : function to print prime Anagram
+     * @returns : prime Anagram Array
+     */
     printAnagram(){
         var k = 0;
-        var primeAnagramArray = new Array();
-        let arr = new Array(1000);
+        var primeAnagramArray = new Array();        // array to store prime anagram
+        //let tempArray = new Array(1000);           
         for(let i=0 ;i<=1000;i++){
-            arr[i]=false;
+            tempArray[i]=false;
         }
         for( i=0; i<=1000; i++ )
         {
-            if( this.checkPrime(i))
+            if( this.checkPrime(i))  // returns number are prime or not
             {
                 for( j=i+1; j<=1000; j++)
                 {
                     if( this.checkPrime(j) )
                     {
-                        if( this.checkAnagramForInteger( i, j ) )
+                        if( this.checkAnagramForInteger( i, j ) )  // returns prime numbers are anagram or not
                         {
-                            if(!arr[j]){
-                                arr[j]=true;
+                            // if(!tempArray[j]){
+                            //     tempArray[j]=true;
                                 //process.stdout.write( i+' ' +j + ' ' );
-                                primeAnagramArray[k++] = i;
+                                primeAnagramArray[k++] = i;  // prime anagram store in array
                                 primeAnagramArray[k++] = j;
-                            }
+                            // }
                         }   
                     }
                 }
